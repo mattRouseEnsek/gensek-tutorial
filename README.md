@@ -149,6 +149,7 @@ let hero = sprites.create(img`
     . . . . f f f . . f f f . . . . 
     . . . . . . . . . . . . . . . . 
     `, SpriteKind.Player)
+    scene.cameraFollowSprite(hero)
 game.onUpdate(function () {
     if (hero.isHittingTile(CollisionDirection.Top)) {
         hero.vy = 0
@@ -170,7 +171,6 @@ Jon needs your help to save the Energy Industry by collecting batteries in his e
 First things first, let's make it so we can move right! 
 Drag a ``||controller:on [right] button [pressed]||`` block into an empty part of the screen
 Then drag a ``||sprites:set [hero]||`` block and place that inside your button press block
-Update 2
 
 ```blocks
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -189,7 +189,7 @@ You might have seen that we never stop moving right unless we hit a wall! Oh no!
 Let's fix that by stopping us from moving right after we let go of the right button.
 
 Drag a ``||controller:on [right] button [released]||`` block into an empty part of the screen
-Then place a ``||Sprites:set [hero] [vx (velocity x)] to 0||`` block and place that inside your button press block
+Then place a ``||sprites:set [hero] [vx (velocity x)] to 0||`` block and place that inside your button press block
 
 
 ```blocks
@@ -216,7 +216,7 @@ Oh no! We can't reach that battery, in the next step let's learn to jump!
 Let's give Jon the ability to jump!
 
 First drag a ``||controller:on [A] button [pressed]||`` block into an empty part of the screen
-Then place a ``||Sprites:set [hero] [vy (velocity y)] to -120||`` block and place that inside your button press block
+Then place a ``||sprites:set [hero] [vy (velocity y)] to -120||`` block and place that inside your button press block
 
 ## Step 7 
 
@@ -228,24 +228,11 @@ Yes! But we need to change some of the code we wrote in the last stage... let's 
 
 First drag a ``||controller:on [A] button [pressed]||`` block into an empty part of the screen
 Now drag a ``||Logic:if [is hero hitting wall bottom] then else if [canDoubleJump] ||`` block inside the block you just created
-Next drag a ``||Sprites:set [hero] [vy (velocity y)] to -120||`` block into the first part of the if block
-Then drag a ``||Sprites:set [hero] [vy (velocity y)] to -90||`` block into the else part of the block
+Next drag a ``||sprites:set [hero] [vy (velocity y)] to -120||`` block into the first part of the if block
+Then drag a ``||sprites:set [hero] [vy (velocity y)] to -90||`` block into the else part of the block
 Finally drag a ``||Variables:set [canDoubleJump] to [false]||`` block just below that
 
 What happens if you don't add the last block?
-
-## Step 9
-
-Now let's make things a bit more challenging... let's add some enemies!
-
-## Step 10
-
-Add walking enemies
-
-## Step 11
-
-Add flying enemies
-
 
 
 

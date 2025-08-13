@@ -1,0 +1,6 @@
+Update all steps
+background with ENSEK logo
+camera follow sprite - test only
+intro section, explain the game, show the end result
+
+look at assets?
