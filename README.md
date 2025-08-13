@@ -160,6 +160,10 @@ game.onUpdate(function () {
         hero.ay = 294
     }
 })
+sprites.onOverlap(SpriteKindLegacy.Player, SpriteKindLegacy.Coin, function (sprite, otherSprite) {
+    otherSprite.destroy(effects.trail, 250)
+    otherSprite.y += -3
+})
 ```
 
 # Solve the Energy Crisis

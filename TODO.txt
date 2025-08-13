@@ -1,6 +1,6 @@
 Update all steps - needs play testing
 
 intro section, explain the game, show the end result
-collect coins
+collect coins - needs testing
 
 look at assets?
