@@ -1,6 +1,6 @@
-Update all steps
-background with ENSEK logo
-camera follow sprite - test only
+Update all steps - needs play testing
+
 intro section, explain the game, show the end result
+collect coins
 
 look at assets?
