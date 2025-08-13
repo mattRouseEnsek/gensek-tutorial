@@ -161,6 +161,10 @@ game.onUpdate(function () {
 })
 ```
 
+# Solve the Energy Crisis
+
+Jon needs your help to save the Energy Industry by collecting batteries in his exciting adventure! To help Jon reach all the batteries, you’ll learn how to code his movements so he can walk left, walk right, and jump over obstacles. By adding these abilities, you’ll make sure Jon can explore every part of the game and collect all the batteries he needs. Get ready to use your coding skills and help Jon on his important mission!
+
 ## Step 1
 
 First things first, let's make it so we can move right! 
@@ -172,4 +176,108 @@ Update 2
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     hero.vx = 50
 })
+```
+
+## Step 2
+
+Try the game! What happens? Does it work as we expected?
+
+## Step 3
+
+You might have seen that we never stop moving right unless we hit a wall! Oh no! 
+
+Let's fix that by stopping us from moving right after we let go of the right button.
+
+Drag a ``||controller:on [right] button [released]||`` block into an empty part of the screen
+Then place a ``||Sprites:set [hero] [vx (velocity x)] to 0||`` block and place that inside your button press block
+
+
+```blocks
+// Finish Moving Right
+controller.right.onEvent(ControllerButtonEvent.Released, function () {
+    hero.vx = 0
+})
+```
+
+Maybe explain a bit what the above means?
+
+## Step 4
+
+Great! Now we can move left and right! Let's collect some batteries and move on to level 2!
+
+``Play the game and move on to level 2``
+
+## Step 5 
+
+Oh no! We can't reach that battery, in the next step let's learn to jump! 
+
+## Step 6
+
+Let's give Jon the ability to jump!
+
+First drag a ``||controller:on [A] button [pressed]||`` block into an empty part of the screen
+Then place a ``||Sprites:set [hero] [vy (velocity y)] to -120||`` block and place that inside your button press block
+
+## Step 7 
+
+Now can we double jump? 
+
+Yes! But we need to change some of the code we wrote in the last stage... let's delete the ``||controller:on [A] button [pressed]||`` block we just created and start again.
+
+## Step 8
+
+First drag a ``||controller:on [A] button [pressed]||`` block into an empty part of the screen
+Now drag a ``||Logic:if [is hero hitting wall bottom] then else if [canDoubleJump] ||`` block inside the block you just created
+Next drag a ``||Sprites:set [hero] [vy (velocity y)] to -120||`` block into the first part of the if block
+Then drag a ``||Sprites:set [hero] [vy (velocity y)] to -90||`` block into the else part of the block
+Finally drag a ``||Variables:set [canDoubleJump] to [false]||`` block just below that
+
+What happens if you don't add the last block?
+
+## Step 9
+
+Now let's make things a bit more challenging... let's add some enemies!
+
+## Step 10
+
+Add walking enemies
+
+## Step 11
+
+Add flying enemies
+
+
+
+
+
+
+
+## Attempt Jump
+```blocks
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    attemptJump()
+})
+
+
+controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
+    attemptJump()
+})
+```
+
+### Jump Function
+```blocks
+    // else if: either fell off a ledge, or double jumping
+    if (hero.isHittingTile(CollisionDirection.Bottom)) {
+        hero.vy = -4 * pixelsToMeters
+    } else if (canDoubleJump) {
+        doubleJumpSpeed = -3 * pixelsToMeters
+        // Good double jump
+        if (hero.vy >= -40) {
+            doubleJumpSpeed = -4.5 * pixelsToMeters
+            //hero.startEffect(effects.trail, 500)
+            //scene.cameraShake(2, 250)
+        }
+        hero.vy = doubleJumpSpeed
+        canDoubleJump = false
+    }
 ```
