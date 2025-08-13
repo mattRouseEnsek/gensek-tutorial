@@ -1,0 +1,22 @@
+{
+    "image3": {
+        "data": "hwQQABAAAAAA/////wAAAAB/d3f3AAAAAH93d/f///8Af3d393d3dwB/d3f3d3d3AH93d/d3d3cAf3d393d3dwB/d3f3d3d3AH93d/d3d3cAf3d393d3dwB/d3f3d3d3AH93d/d3d3cAf3d393d3dwB/d3f3////AH93d/cAAAAA/////wAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "pipetop"
+    },
+    "image2": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAA//////////93d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d///////////AAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "pipe"
+    },
+    "image1": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADw//////////BERET//////0RERP//////RP9E///////0/0////////T/T///////RP9E//////9ERET/////8ERERP/////w/////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "battery"
+    },
+    "*": {
+        "mimeType": "image/x-mkcd-f4",
+        "dataEncoding": "base64",
+        "namespace": "myImages"
+    }
+}
