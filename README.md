@@ -160,7 +160,7 @@ game.onUpdate(function () {
         hero.ay = 294
     }
 })
-sprites.onOverlap(SpriteKindLegacy.Player, SpriteKindLegacy.Coin, function (sprite, otherSprite) {
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Coin, function (sprite, otherSprite) {
     otherSprite.destroy(effects.trail, 250)
     otherSprite.y += -3
 })
