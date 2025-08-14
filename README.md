@@ -236,7 +236,6 @@ let canDoubleJump:boolean = false;
 
 Jon needs your help to save the Energy Industry by collecting batteries in his exciting adventure! To help Jon reach all the batteries, you’ll learn how to code his movements so he can walk left, walk right, and jump over obstacles. By adding these abilities, you’ll make sure Jon can explore every part of the game and collect all the batteries he needs. Get ready to use your coding skills and help Jon on his important mission!
 
-![Game animation](/static/demo.gif)
 
 ## Step 1
 
