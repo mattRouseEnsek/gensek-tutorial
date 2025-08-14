@@ -1,17 +1,20 @@
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    hero.vy += -120
+    hero.vy = -120
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
-    hero.vx += -50
+    hero.vx = -50
 })
 controller.right.onEvent(ControllerButtonEvent.Released, function () {
-    hero.vx += 0
+    hero.vx = 0
 })
 controller.left.onEvent(ControllerButtonEvent.Released, function () {
-    hero.vx += 0
+    hero.vx = 0
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
-    hero.vx += 50
+    hero.vx = 50
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
+    game.over(true, effects.confetti)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     otherSprite.destroy(effects.trail, 250)
@@ -28,7 +31,7 @@ tiles.setCurrentTilemap(tiles.createTilemap(hex`40000800000000000000000000000000
 ............................2................2..................
 ...........2................2................2........2.........
 2222222222222222222222222222222222222222222222222222222222222222
-`, [myTiles.transparency16, sprites.builtin.forestTiles25, sprites.builtin.brick, null, sprites.dungeon.collectibleInsignia], TileScale.Sixteen))
+`, [myTiles.transparency16, sprites.builtin.forestTiles25, sprites.builtin.brick, null, null], TileScale.Sixteen))
 scene.setBackgroundImage(img`
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -171,45 +174,64 @@ hero = sprites.create(img`
     `, SpriteKind.Player)
 scene.cameraFollowSprite(hero)
 let coords = [
-    { x: 3, y: 6 }, 
-    { x: 8, y: 6 },
-    { x: 11, y: 4 },
-    { x: 14, y: 6 },
-    { x: 17, y: 6 },
-    { x: 20, y: 5 },
-    { x: 23, y: 5 },
-    { x: 26, y: 5 },
-    { x: 28, y: 4 },
-    { x: 32, y: 5 },
-    { x: 35, y: 3 },
-    { x: 38, y: 3 },
-    { x: 41, y: 4 },
-    { x: 45, y: 2 },
-    { x: 48, y: 5 },
-    { x: 52, y: 5 },
-    { x: 57, y: 5 },
-    ]
+{ x: 3, y: 6 },
+{ x: 8, y: 6 },
+{ x: 11, y: 4 },
+{ x: 14, y: 6 },
+{ x: 17, y: 6 },
+{ x: 20, y: 5 },
+{ x: 23, y: 5 },
+{ x: 26, y: 5 },
+{ x: 28, y: 4 },
+{ x: 32, y: 5 },
+{ x: 35, y: 3 },
+{ x: 38, y: 3 },
+{ x: 41, y: 4 },
+{ x: 45, y: 2 },
+{ x: 48, y: 5 },
+{ x: 52, y: 5 },
+{ x: 57, y: 5 }
+]
 for (let point of coords) {
     coin = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . f f f f . . . . . . 
-        . . . . f f 5 5 5 5 f f . . . . 
-        . . . . f 5 5 5 5 5 5 f . . . . 
-        . . . f 5 5 5 4 4 5 5 5 f . . . 
-        . . . f 5 5 5 4 4 5 5 5 f . . . 
-        . . . f 5 5 5 4 4 5 5 5 f . . . 
-        . . . f 5 5 5 4 4 5 5 5 f . . . 
-        . . . . f 5 5 5 5 5 5 f . . . . 
-        . . . . f f 5 5 5 5 f f . . . . 
-        . . . . . . f f f f . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
+        . . . . . f f f f f f . . . . . 
+        . . . f f f f f f f f f f . . . 
+        . . . f 4 4 4 4 4 4 4 4 f . . . 
+        . . . f 4 4 4 f f 4 4 4 f . . . 
+        . . . f 4 4 f f f f 4 4 f . . . 
+        . . . f 4 4 f f f f 4 4 f . . . 
+        . . . f 4 4 4 f f 4 4 4 f . . . 
+        . . . f 4 4 4 4 4 4 4 4 f . . . 
+        . . . f f f f f f f f f f . . . 
+        . . . f f f f f f f f f f . . . 
+        . . . f f f f f f f f f f . . . 
+        . . . f f f f f f f f f f . . . 
+        . . . f f f f f f f f f f . . . 
+        . . . f f f f f f f f f f . . . 
+        . . . f f f f f f f f f f . . . 
+        . . . f f f f f f f f f f . . . 
         `, SpriteKind.Food)
     tiles.placeOnTile(coin, tiles.getTileLocation(point.x, point.y))
 }
+let finish = sprites.create(img`
+    . . . . . . . 2 2 . . . . . . . 
+    . . . . . 2 2 2 2 . . . . . . . 
+    . . . . 2 2 2 2 2 . . . . . . . 
+    . . . 2 2 2 2 2 2 . . . . . . . 
+    . . 2 2 2 2 2 2 2 . . . . . . . 
+    . . . . . . . . f . . . . . . . 
+    . . . . . . . . f . . . . . . . 
+    . . . . . . . . f . . . . . . . 
+    . . . . . . . . f . . . . . . . 
+    . . . . . . . . f . . . . . . . 
+    . . . . . . . . f . . . . . . . 
+    . . . . . . . . f . . . . . . . 
+    . . . . . . . . f . . . . . . . 
+    . . . . . e e e e e e e . . . . 
+    . . . e e e e e e e e e e . . . 
+    . . e e e e e e e e e e e e . . 
+    `, SpriteKind.Projectile)
+tiles.placeOnTile(finish, tiles.getTileLocation(61, 6))
 game.onUpdate(function () {
     if (hero.isHittingTile(CollisionDirection.Top)) {
         hero.vy = 0
