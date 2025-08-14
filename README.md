@@ -185,49 +185,49 @@ let coords = [
     ]
 for (let point of coords) {
     coin = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . f f f f . . . . . . 
-        . . . . f f 5 5 5 5 f f . . . . 
-        . . . . f 5 5 5 5 5 5 f . . . . 
-        . . . f 5 5 5 4 4 5 5 5 f . . . 
-        . . . f 5 5 5 4 4 5 5 5 f . . . 
-        . . . f 5 5 5 4 4 5 5 5 f . . . 
-        . . . f 5 5 5 4 4 5 5 5 f . . . 
-        . . . . f 5 5 5 5 5 5 f . . . . 
-        . . . . f f 5 5 5 5 f f . . . . 
-        . . . . . . f f f f . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
+        . . . . . f f f f f f . . . . . 
+        . . . f f f f f f f f f f . . . 
+        . . . f 4 4 4 4 4 4 4 4 f . . . 
+        . . . f 4 4 4 f f 4 4 4 f . . . 
+        . . . f 4 4 f f f f 4 4 f . . . 
+        . . . f 4 4 f f f f 4 4 f . . . 
+        . . . f 4 4 4 f f 4 4 4 f . . . 
+        . . . f 4 4 4 4 4 4 4 4 f . . . 
+        . . . f f f f f f f f f f . . . 
+        . . . f f f f f f f f f f . . . 
+        . . . f f f f f f f f f f . . . 
+        . . . f f f f f f f f f f . . . 
+        . . . f f f f f f f f f f . . . 
+        . . . f f f f f f f f f f . . . 
+        . . . f f f f f f f f f f . . . 
+        . . . f f f f f f f f f f . . . 
         `, SpriteKind.Food)
     tiles.placeOnTile(coin, tiles.getTileLocation(point.x, point.y))
 }
 let finish:Sprite = null
 finish = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . f f f f . . . . . . 
-        . . . . f f 5 5 5 5 f f . . . . 
-        . . . . f 5 5 5 5 5 5 f . . . . 
-        . . . f 5 5 5 4 4 5 5 5 f . . . 
-        . . . f 5 5 5 4 4 5 5 5 f . . . 
-        . . . f 5 5 5 4 4 5 5 5 f . . . 
-        . . . f 5 5 5 4 4 5 5 5 f . . . 
-        . . . . f 5 5 5 5 5 5 f . . . . 
-        . . . . f f 5 5 5 5 f f . . . . 
-        . . . . . . f f f f . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
+        . . . . . . . 2 2 . . . . . . . 
+        . . . . . 2 2 2 2 . . . . . . . 
+        . . . . 2 2 2 2 2 . . . . . . . 
+        . . . 2 2 2 2 2 2 . . . . . . . 
+        . . 2 2 2 2 2 2 2 . . . . . . . 
+        . . . . . . . . f . . . . . . . 
+        . . . . . . . . f . . . . . . . 
+        . . . . . . . . f . . . . . . . 
+        . . . . . . . . f . . . . . . . 
+        . . . . . . . . f . . . . . . . 
+        . . . . . . . . f . . . . . . . 
+        . . . . . . . . f . . . . . . . 
+        . . . . . . . . f . . . . . . . 
+        . . . . . e e e e e e e . . . . 
+        . . . e e e e e e e e e e . . . 
+        . . e e e e e e e e e e e e . .  
         `, SpriteKind.Projectile) 
 tiles.placeOnTile(finish, tiles.getTileLocation(61, 6))
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
     game.over(true, effects.confetti)
 })
-
+let canDoubleJump:boolean = false;a
 ```
 
 # Solve the Energy Crisis
@@ -274,11 +274,11 @@ Can you make the same changes so we can move left too?
 
 ## Step 4
 
-Great! Now we can move left and right! Let's collect some gems!
+Great! Now we can move left and right! Let's collect some batteries!
 
 ## Step 5 
 
-Oh no! We can't reach that gem, in the next step let's learn to jump! 
+Oh no! We can't reach that battery, in the next step let's learn to jump! 
 
 ## Step 6
 
@@ -299,42 +299,7 @@ Yes! But we need to change some of the code we wrote in the last stage... let's 
 First drag a ``||controller:on [A] button [pressed]||`` block into an empty part of the screen
 Now drag a ``||logic:if [is hero hitting wall bottom] then else if [canDoubleJump] ||`` block inside the block you just created
 Next drag a ``||sprites:set [hero] [vy (velocity y)] to -120||`` block into the first part of the if block
-Then drag a ``||sprites:set [hero] [vy (velocity y)] to -90||`` block into the else part of the block
+Then drag a ``||sprites:set [hero] [vy (velocity y)] to -170||`` block into the else part of the block
 Finally drag a ``||variables:set [canDoubleJump] to [false]||`` block just below that
 
 What happens if you don't add the last block?
-
-
-
-
-
-
-## Attempt Jump
-```blocks
-controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    attemptJump()
-})
-
-
-controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
-    attemptJump()
-})
-```
-
-### Jump Function
-```blocks
-    // else if: either fell off a ledge, or double jumping
-    if (hero.isHittingTile(CollisionDirection.Bottom)) {
-        hero.vy = -4 * pixelsToMeters
-    } else if (canDoubleJump) {
-        doubleJumpSpeed = -3 * pixelsToMeters
-        // Good double jump
-        if (hero.vy >= -40) {
-            doubleJumpSpeed = -4.5 * pixelsToMeters
-            //hero.startEffect(effects.trail, 500)
-            //scene.cameraShake(2, 250)
-        }
-        hero.vy = doubleJumpSpeed
-        canDoubleJump = false
-    }
-```
