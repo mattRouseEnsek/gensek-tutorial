@@ -8,7 +8,7 @@ tiles.setCurrentTilemap(tiles.createTilemap(hex`40000800000000000000000000000000
 ............................2................2..................
 ...........2................2................2........2.........
 2222222222222222222222222222222222222222222222222222222222222222
-`, [myTiles.transparency16,sprites.builtin.forestTiles25,sprites.builtin.brick,sprites.dungeon.collectibleRedCrystal,sprites.dungeon.collectibleInsignia], TileScale.Sixteen))
+`, [myTiles.transparency16,sprites.builtin.forestTiles25,sprites.builtin.brick,null,sprites.dungeon.collectibleInsignia], TileScale.Sixteen))
     scene.setBackgroundImage(img`
         9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
         9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -160,10 +160,50 @@ game.onUpdate(function () {
         hero.ay = 294
     }
 })
-//sprites.onOverlap(SpriteKind.Player, SpriteKind.Coin, function (sprite, otherSprite) {
-//    otherSprite.destroy(effects.trail, 250)
-//    otherSprite.y += -3
-//})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
+    otherSprite.destroy(effects.trail, 250)
+    otherSprite.y += -3
+})
+let coords = [
+    { x: 3, y: 6 }, 
+    { x: 8, y: 6 },
+    { x: 11, y: 4 },
+    { x: 14, y: 6 },
+    { x: 17, y: 6 },
+    { x: 20, y: 5 },
+    { x: 23, y: 5 },
+    { x: 26, y: 5 },
+    { x: 28, y: 4 },
+    { x: 32, y: 5 },
+    { x: 35, y: 3 },
+    { x: 38, y: 3 },
+    { x: 41, y: 4 },
+    { x: 45, y: 2 },
+    { x: 48, y: 5 },
+    { x: 52, y: 5 },
+    { x: 57, y: 5 },
+    ]
+for (let point of coords) {
+    coin = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . f f f f . . . . . . 
+        . . . . f f 5 5 5 5 f f . . . . 
+        . . . . f 5 5 5 5 5 5 f . . . . 
+        . . . f 5 5 5 4 4 5 5 5 f . . . 
+        . . . f 5 5 5 4 4 5 5 5 f . . . 
+        . . . f 5 5 5 4 4 5 5 5 f . . . 
+        . . . f 5 5 5 4 4 5 5 5 f . . . 
+        . . . . f 5 5 5 5 5 5 f . . . . 
+        . . . . f f 5 5 5 5 f f . . . . 
+        . . . . . . f f f f . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Food)
+    tiles.placeOnTile(coin, tiles.getTileLocation(point.x, point.y))
+}
 ```
 
 # Solve the Energy Crisis
