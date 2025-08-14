@@ -227,7 +227,7 @@ tiles.placeOnTile(finish, tiles.getTileLocation(61, 6))
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
     game.over(true, effects.confetti)
 })
-let canDoubleJump:boolean = false;a
+let canDoubleJump:boolean = false;
 ```
 
 # Solve the Energy Crisis
