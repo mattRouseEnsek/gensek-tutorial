@@ -1,5 +1,11 @@
+let canDoubleJump:boolean = false;
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    hero.vy = -120
+    if (hero.isHittingTile(CollisionDirection.Bottom)) {
+        hero.vy = -120
+    } else if (canDoubleJump) {
+        hero.vy = -170
+        canDoubleJump = false
+    }
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     hero.vx = -50
@@ -238,6 +244,7 @@ game.onUpdate(function () {
     }
     if (hero.isHittingTile(CollisionDirection.Bottom)) {
         hero.ay = 0
+        canDoubleJump = true;
     } else {
         hero.ay = 294
     }
