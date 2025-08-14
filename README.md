@@ -8,7 +8,7 @@ tiles.setCurrentTilemap(tiles.createTilemap(hex`40000800000000000000000000000000
 ............................2................2..................
 ...........2................2................2........2.........
 2222222222222222222222222222222222222222222222222222222222222222
-`, [myTiles.transparency16,sprites.builtin.forestTiles25,sprites.builtin.brick,null,sprites.dungeon.collectibleInsignia], TileScale.Sixteen))
+`, [myTiles.transparency16,sprites.builtin.forestTiles25,sprites.builtin.brick,null,null], TileScale.Sixteen))
     scene.setBackgroundImage(img`
         9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
         9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -204,6 +204,30 @@ for (let point of coords) {
         `, SpriteKind.Food)
     tiles.placeOnTile(coin, tiles.getTileLocation(point.x, point.y))
 }
+let finish:Sprite = null
+finish = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . f f f f . . . . . . 
+        . . . . f f 5 5 5 5 f f . . . . 
+        . . . . f 5 5 5 5 5 5 f . . . . 
+        . . . f 5 5 5 4 4 5 5 5 f . . . 
+        . . . f 5 5 5 4 4 5 5 5 f . . . 
+        . . . f 5 5 5 4 4 5 5 5 f . . . 
+        . . . f 5 5 5 4 4 5 5 5 f . . . 
+        . . . . f 5 5 5 5 5 5 f . . . . 
+        . . . . f f 5 5 5 5 f f . . . . 
+        . . . . . . f f f f . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Projectile) 
+tiles.placeOnTile(finish, tiles.getTileLocation(61, 6))
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
+    game.over(true, effects.confetti)
+})
+
 ```
 
 # Solve the Energy Crisis
